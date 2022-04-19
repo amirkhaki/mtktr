@@ -43,6 +43,7 @@ INSTALLED_APPS = [
         'djoser',
 
         'userauth.apps.UserauthConfig',
+        'task.apps.TaskConfig',
         ]
 
 MIDDLEWARE = [
