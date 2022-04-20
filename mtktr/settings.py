@@ -41,6 +41,8 @@ INSTALLED_APPS = [
 
         'rest_framework',
         'djoser',
+        'drf_spectacular',
+        'drf_spectacular_sidecar',
 
         'userauth.apps.UserauthConfig',
         'task.apps.TaskConfig',
@@ -94,6 +96,16 @@ REST_FRAMEWORK = {
             ),
         }
 """
+SPECTACULAR_SETTINGS = {
+    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+    # OTHER SETTINGS
+}
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 SIMPLE_JWT = {
         'AUTH_HEADER_TYPES': ('JWT',),
         }
