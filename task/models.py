@@ -10,7 +10,7 @@ class TelegramTask(models.Model):
             related_name='tg_tasks',
             on_delete=models.CASCADE)
     # cost per perform
-    cpp = models.IntegerField()
+    cpp = models.PositiveIntegerField(verbose_name='cost per perform')
     types = (('group', 'Group'), ('channel', 'Channel'))
     task_type = models.CharField(max_length=10, choices=types)
     
@@ -21,8 +21,10 @@ class TelegramAccount(models.Model):
     verified = models.BooleanField(default=False)
     username = models.CharField(unique=True, max_length=32)
     # user id in telegram
-    tid = models.CharField(unique=True, max_length=30, editable=False)
-    tasks = models.ManyToManyField(TelegramTask, related_name='performers')
+    tid = models.CharField(unique=True, max_length=30,
+            verbose_name='telegram id')
+    tasks = models.ManyToManyField(TelegramTask,
+            blank=True, related_name='performers')
 
 
     def verify(self):
