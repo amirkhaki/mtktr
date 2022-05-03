@@ -5,3 +5,4 @@ urlpatterns = [
         path('accounts/', include(account_router.urls)),
         path('', include(task_router.urls)),
         ]
+

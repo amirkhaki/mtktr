@@ -4,4 +4,4 @@ from . import views
 account_router = DefaultRouter()
 account_router.register('telegram', views.TelegramAccountViewSet)
 task_router = DefaultRouter()
-task_router.register('telegram', views.TelegramTaskViewSet)
+task_router.register('telegram', views.TelegramTaskViewSet, basename='task')
