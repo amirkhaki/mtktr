@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
-import telegram
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -157,5 +156,14 @@ AUTH_USER_MODEL = 'userauth.User'
 TG = config('TG_URL')
 BOT_USERNAME= config('BOT_USERNAME')
 
-# how many seconds user have to end the task after start?
+# how many seconds user have to end the telegram task after start?
 WAIT_DURATION=120
+
+DC_API_BASE_URL = config('DC_API_BASE_URL')
+DC_AUTHORIZATION_BASE_URL = DC_API_BASE_URL + '/oauth2/authorize'
+DC_TOKEN_URL = DC_API_BASE_URL + '/oauth2/token'
+DC_OAUTH2_CLIENT_ID = config('DC_OAUTH2_CLIENT_ID')
+DC_OAUTH2_CLIENT_SECRET = config('DC_OAUTH2_CLIENT_SECRET')
+DC_OAUTH2_REDIRECT_URI = 'http://127.0.0.1:8000/tasks/accounts/discord/callback'
+DC_REDIRECT_TO = 'http://127.0.0.1:8000/'
+DC_BOT_TOKEN = config('DC_BOT_TOKEN')

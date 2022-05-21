@@ -3,5 +3,6 @@ from . import views
 
 account_router = DefaultRouter()
 account_router.register('telegram', views.TelegramAccountViewSet)
+account_router.register('discord', views.DiscordAccountViewSet)
 task_router = DefaultRouter()
 task_router.register('telegram', views.TelegramTaskViewSet, basename='task')

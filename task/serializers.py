@@ -2,7 +2,20 @@ from rest_framework.serializers import (
         ModelSerializer, ValidationError, SerializerMethodField)
 from django.conf import settings
 #import telegram
-from .models import TelegramAccount, TelegramTask
+from .models import TelegramAccount, TelegramTask, DiscordAccount, DiscordTask
+
+class DiscordTaskSerializer(ModelSerializer):
+
+    class Meta:
+        model = DiscordTask
+        fields = ['id', 'cpp', 'guild_name']
+
+class DiscordAccountSerializer(ModelSerializer):
+
+    class Meta:
+        model = DiscordAccount
+        fields = ['id', 'username']
+
 
 class TelegramAccountSerializer(ModelSerializer):
 
@@ -28,3 +41,4 @@ class TelegramTaskSerializer(ModelSerializer):
     class Meta:
         model = TelegramTask
         fields = ['id', 'cpp', 'task_type', 'chat_url']
+
