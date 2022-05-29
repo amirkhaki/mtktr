@@ -246,7 +246,7 @@ class TelegramTaskViewSet(mixins.RetrieveModelMixin,
     @action(methods=['get'], detail=False, url_path='invite')
     def get_invite_code(self, request, pk=None):
         t = self.get_object()
-        if t.task_type is 'channel':
+        if t.task_type == 'channel':
             return Response({'error':'yoy can not invite to channel'})
         return Response({'code': f'{request.user.pk}'})
 
