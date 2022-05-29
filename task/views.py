@@ -71,6 +71,11 @@ class DiscordTaskViewSet(mixins.RetrieveModelMixin,
         except Exception as e:
             return Response({'success': False})
         return Response({'success': True})
+    @action(methods=['post'], detail=False,
+            url_path='invited')
+    def on_invite(self, request):
+        pass
+
 
 
 class DiscordAccountViewSet(mixins.RetrieveModelMixin,
