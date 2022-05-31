@@ -70,11 +70,25 @@ class DiscordTaskViewSet(mixins.RetrieveModelMixin,
             self._add_to_guild(dcaccount.access_token, task.guild_id, dcaccount.did)
         except Exception as e:
             return Response({'success': False})
+        task.count -= 1
+        task.performers.add(dcaccount)
+        dcaccount.owner.credit += task.cpp
+        dcaccount.owner.save()
         return Response({'success': True})
     @action(methods=['post'], detail=False,
             url_path='invited')
     def on_invite(self, request):
-        pass
+        body = json.loads(request.body)
+        task = get_object_or_404(DiscordTask, guild_id=body['guild_id'])
+        if task.count == 0:
+            raise Http404()
+        inviter = get_object_or_404(DiscordAccount, did=body['inviter_id'])
+        task.count -= 1
+        task.save()
+        inviter.owner.credit += task.cpp
+        inviter.owner.save()
+            
+
 
 
 
@@ -238,6 +252,8 @@ class TelegramTaskViewSet(mixins.RetrieveModelMixin,
         if not resp['ismember']:
             return Response({'success':False, 'error': 'user has not joined'})
         task.performers.add(tgaccount)
+        task.count -= 1
+        task.save()
         tgaccount.owner.credit += task.cpp
         tgaccount.owner.save()
         return Response({'success': True})

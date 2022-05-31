@@ -10,7 +10,7 @@ def get_sentinel_user():
 
 class DiscordTask(models.Model):
     guild_name = models.CharField(max_length=200)
-    guild_id = models.CharField(max_length=200)
+    guild_id = models.CharField(unique=True, max_length=200)
     cpp = models.PositiveIntegerField(verbose_name='cost per perform')
     count = models.IntegerField(default=0)
 
